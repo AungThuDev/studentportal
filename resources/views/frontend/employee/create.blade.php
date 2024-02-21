@@ -11,14 +11,19 @@
                 Add Fixed Data
             </a>
         </div>
-        <form action="" method="" enctype="multipart/form-data">
+        <form action="{{ route('employee.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="col-lg-10 offset-lg-1 student-form-container">
                 <div class="d-flex flex-column position-relative justify-content-center align-items-center">
                     <p>Occupation - <span class="text-underline">Executive Manager</span></p>
                     <img class="icon-3 mt-4 cursor-pointer" src="{{ asset('asset/img/student.png') }}" id="uploadButton">
-                    <input name="" id="fileInput" type="file" class="position-absolute"
-                    style="visibility: hidden;">
+                    <input name="image" id="fileInput" type="file" class="position-absolute"
+                        style="visibility: hidden;">
+                    @error('image')
+                        <span role="alert">
+                            <strong class="text-danger">{{ $message }}</strong>
+                        </span>
+                    @enderror
                     <div class="position-absolute start-0 top-0 university-container">
                         <p class="mb-0 fs-4 text-dark">M.S.T University</p>
                         <p class="mb-0 fs-5 text-muted">Employment Year - *2023 - 2024*</p>
@@ -31,47 +36,92 @@
                 </div>
                 <div>
                     <p class="mb-0">Name</p>
-                    <input class="custom-form-control-1 w-100" value="Ms. Thiri Shwe Sin">
+                    <input class="custom-form-control-1 w-100" type="text" name="name">
                 </div>
+                @error('name')
+                    <span role="alert">
+                        <strong class="text-danger">{{ $message }}</strong>
+                    </span>
+                @enderror
                 <div class="mt-3">
-                    <p class="mb-0">Student ID</p>
-                    <input class="custom-form-control-1 w-100" value="MST-TSS0123">
+                    <p class="mb-0">Employee ID</p>
+                    <input class="custom-form-control-1 w-100" type="text" name="emp_no">
                 </div>
+                @error('emp_no')
+                    <span role="alert">
+                        <strong class="text-danger">{{ $message }}</strong>
+                    </span>
+                @enderror
                 <div class="row d-flex mt-3">
                     <div class="col-md-6">
                         <p class="mb-0">NRC Number</p>
-                        <input class="custom-form-control-1 w-100" value="12/PAZATA (N) 123456">
+                        <input class="custom-form-control-1 w-100" type="text" name="nrc">
+                        @error('nrc')
+                            <span role="alert">
+                                <strong class="text-danger">{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <p class="mb-0">Date Of Birth</p>
-                        <input class="custom-form-control-1 w-100" value="3rd Sep 2000">
+                        <input class="custom-form-control-1 w-100" type="date" name="date">
+                        @error('date')
+                            <span role="alert">
+                                <strong class="text-danger">{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="mt-3">
-                    <p class="mb-0">Batch No.</p>
-                    <input class="custom-form-control-1 w-100" value="Batch - 47">
+                    <p class="mb-0">Position</p>
+                    <input class="custom-form-control-1 w-100" type="text" name="position">
                 </div>
+                @error('position')
+                    <span role="alert">
+                        <strong class="text-danger">{{ $message }}</strong>
+                    </span>
+                @enderror
                 <div class="mt-3">
-                    <p class="mb-0">Level of Education</p>
-                    <input class="custom-form-control-1 w-100" value="Lv.5 NCC Diploma in Computing">
+                    <p class="mb-0">Department</p>
+                    <input class="custom-form-control-1 w-100" type="text" name="department">
                 </div>
+                @error('department')
+                    <span role="alert">
+                        <strong class="text-danger">{{ $message }}</strong>
+                    </span>
+                @enderror
                 <div class="row d-flex mt-3">
                     <div class="col-md-6">
                         <p class="mb-0">Email Address</p>
-                        <input class="custom-form-control-1 w-100" value="thirishwesin3@gmail.com">
+                        <input class="custom-form-control-1 w-100" type="email" name="email">
+                        @error('email')
+                            <span role="alert">
+                                <strong class="text-danger">{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-md-6">
-                        <p class="mb-0">Date Of Birth</p>
-                        <input class="custom-form-control-1 w-100" value="+959 959 902 870">
+                        <p class="mb-0">Phone Number</p>
+                        <input class="custom-form-control-1 w-100" type="phone" name="phone">
+                        @error('phone')
+                            <span role="alert">
+                                <strong class="text-danger">{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="mt-3">
                     <p class="mb-0">Address</p>
-                    <input class="custom-form-control-1 w-100" value="36 Alan Pya Pagoda St, Yangon">
+                    <input class="custom-form-control-1 w-100" type="text" name="address">
                 </div>
+                @error('address')
+                    <span role="alert">
+                        <strong class="text-danger">{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="col-lg-10 mb-2 offset-lg-1 d-flex justify-content-around align-items-center col-gap-2 mt-3">
-                
+
                 <button type="submit" class="custom-btn-primary border-0 rounded-pill text-dark fs-5 px-5">Done</button>
             </div>
         </form>

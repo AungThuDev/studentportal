@@ -39,3 +39,4 @@ Route::post('/students',[App\Http\Controllers\StudentController::class,'store'])
 //For Employee
 Route::get('/employee',[App\Http\Controllers\EmployeeController::class,'index'])->name('employee');
 Route::get('/employee/create',[App\Http\Controllers\EmployeeController::class,'create'])->name('employee.create');
+Route::post('/employee',[App\Http\Controllers\EmployeeController::class,'store'])->name('employee.store');

@@ -9,7 +9,8 @@ class StudentController extends Controller
 {
     public function index()
     {
-        return view('frontend.student.index');
+        $students = Student::all();
+        return view('frontend.student.index',compact('students'));
     }
     public function create()
     {
@@ -27,7 +28,7 @@ class StudentController extends Controller
             'email' => 'required|string',
             'phone' => 'required|numeric',
             'address' => 'required|string',
-            'image' => 'required|string',
+            'image' => 'required',
         ]);
 
         $student = new Student();
@@ -35,6 +36,7 @@ class StudentController extends Controller
         $student->student_no = $request->input('student_no');
         $student->nrc = $request->input('nrc');
         $student->date = $request->input('date');
+        $student->batch = $request->input('batch');
         $student->education = $request->input('education');
         $student->email = $request->input('email');
         $student->phone = $request->input('phone');
@@ -45,6 +47,6 @@ class StudentController extends Controller
         $student->image = $imageName;
 
         $student->save();
-        return redirect()->with('student');
+        return redirect()->route('student');
     }
 }

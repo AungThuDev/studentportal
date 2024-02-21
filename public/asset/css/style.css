@@ -40,7 +40,11 @@ body {
 }
 
 .main-content {
-    background: linear-gradient(to bottom, var(--gradient-primary), var(--gradient-secondary));
+    background: linear-gradient(
+        to bottom,
+        var(--gradient-primary),
+        var(--gradient-secondary)
+    );
     padding: 3rem 5rem;
     min-height: 90vh;
 }
@@ -82,7 +86,12 @@ body {
 .authority-form-container {
     border-width: 2px;
     border-style: solid;
-    border-image: linear-gradient(to bottom, rgb(101, 156, 169), var(--gradient-secondary)) 1;
+    border-image: linear-gradient(
+            to bottom,
+            rgb(101, 156, 169),
+            var(--gradient-secondary)
+        )
+        1;
 }
 
 .student-form-container {
@@ -90,20 +99,25 @@ body {
 
     border-width: 2px;
     border-style: solid;
-    border-image: linear-gradient(to bottom, var(--gradient-primary), var(--primary-text)) 1;
+    border-image: linear-gradient(
+            to bottom,
+            var(--gradient-primary),
+            var(--primary-text)
+        )
+        1;
 }
 
 .filter-btn {
     background-color: #5ea1b2;
-    padding: .5rem 2rem;
+    padding: 0.5rem 2rem;
     border: 1px solid var(--primary-text);
 }
 
 .custom-btn-primary {
     color: white;
-    padding: .5rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     background-color: var(--primary-text);
-    transition: all .5s;
+    transition: all 0.5s;
 }
 
 .custom-btn-primary:hover {
@@ -112,12 +126,12 @@ body {
 
 .custom-btn-secondary {
     background-color: var(--primary-text) !important;
-    padding: .5rem 1.5rem !important;
+    padding: 0.5rem 1.5rem !important;
 }
 
 .authority-done-btn {
     background-color: var(--primary-text) !important;
-    padding: .1rem .9rem !important;
+    padding: 0.1rem 0.9rem !important;
 }
 
 .authority-input {
@@ -182,6 +196,7 @@ body {
     background: linear-gradient(to bottom, #5ea1b2, #71a8b6);
     border-radius: 20px;
     padding: 1rem;
+    width: 500px;
 }
 
 .card-container {
@@ -217,7 +232,7 @@ body {
     }
 }
 
-@media (max-width:992px) {
+@media (max-width: 992px) {
     .register {
         height: 50px;
     }
@@ -227,5 +242,4 @@ body {
     .nav-item {
         display: none;
     }
-
 }
