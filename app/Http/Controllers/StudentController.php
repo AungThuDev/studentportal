@@ -81,16 +81,26 @@ class StudentController extends Controller
     public function exportImage($id)
     {
         $student = Student::findOrFail($id);
-        $image = View::make('frontend.student.front',$student)->render();
+
+        $info = [
+            'qr'=> $student->qrcode,
+            'name' => $student->name,
+            'no' => $student->student_no,
+            'education'=> $student->education,
+            'batch' => $student->batch,
+            'university' => $student->school->name,
+        ];
+
+        $image = View::make('frontend.student.front',$info)->render();
 
         $imageDirectory = public_path('images');
-        $imagePath = $imageDirectory . '/output.jpg';
+        $imagePath = $imageDirectory . '/student_QR.jpg';
 
         if(!file_exists($imageDirectory)){
             mkdir($imageDirectory, 0755 ,true);
         }
 
-        Browsershot::html($image)->setIncludePath('$PATH:/usr/local/bin/')->save($imagePath);
-        return response()->download($imagePath,'output.jpg');
+        Browsershot::html($image)->setIncludePath('$PATH:/home/hein/nodejs/bin/')->save($imagePath);
+        return response()->download($imagePath,'student_QR.jpg');
     }
 }
