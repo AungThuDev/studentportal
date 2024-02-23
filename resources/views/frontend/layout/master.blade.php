@@ -26,6 +26,7 @@
             @auth
             <form action="{{route('logout-school')}}" method="POST">
                 @csrf
+                <a href="{{route('dashboard',['name'=>Session::get('name'),'id'=>auth()->user()->id])}}" class="text-white me-5">Dashboard</a>
                 <button class="btn btn-dark rounded-pill" style="margin-right: 10px;">Logout</button>
             </form>
             @else

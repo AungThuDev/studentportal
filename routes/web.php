@@ -39,6 +39,9 @@ Route::get('/{name}/user-dashboard/{id}/students/create',[App\Http\Controllers\S
 Route::post('/students',[App\Http\Controllers\StudentController::class,'store'])->name('student.store')->middleware('auth');
 Route::get('/{name}/user-dashboard/{id}/student/detail/{stdId}',[App\Http\Controllers\StudentController::class,'show'])->name('student.detail');
 
+Route::get('/students-info/{id}',[App\Http\Controllers\StudentController::class,'detailInfo'])->name('student.info');
+Route::get('/student-photos/{id}',[App\Http\Controllers\StudentController::class,'exportImage'])->name('image');
+
 //For Employee
 Route::get('/{name}/user-dashboard/{id}/employee',[App\Http\Controllers\EmployeeController::class,'index'])->name('employee')->middleware('auth');
 Route::get('/{name}/user-dashboard/{id}/employee/create',[App\Http\Controllers\EmployeeController::class,'create'])->name('employee.create')->middleware('auth');

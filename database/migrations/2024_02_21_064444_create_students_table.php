@@ -25,7 +25,8 @@ class CreateStudentsTable extends Migration
             $table->string('email');
             $table->bigInteger('phone');
             $table->string('address');
-            $table->string('image');
+            $table->string('image')->nullable();
+            $table->longText('qrcode')->nullable();
             $table->timestamps();
         });
     }

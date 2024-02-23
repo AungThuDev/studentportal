@@ -33,8 +33,9 @@
             <div class="row d-flex justify-content-start flex-wrap col-gap-2 card-container mt-5">
 
                 @foreach ($students as $student)
-                    <a href="{{route('student.detail',['name'=>$student->school->name,'id'=>auth()->user()->id,'stdId'=>$student->id])}}">
+                    
                     <div class="col-lg-4 d-flex justify-content-center">
+                    
                         <div class="d-flex flex-column align-items-center custom-card">
                             <div class="col-md-3 d-flex justify-content-center">
                                 <img class="icon" src="{{ asset('storage/students/' . $student->image) }}">
@@ -42,9 +43,11 @@
                             <p class="mb-0 mt-3">Name - {{ $student->name }}</p>
                             <p class="mb-0 mt-3">Std ID - {{ $student->student_no }}</p>
                             <p class="mb-0 mt-3">Batch No. - Batch - {{ $student->batch }}</p>
+                            <a href="{{route('student.detail',['name'=>$student->school->name,'id'=>auth()->user()->id,'stdId'=>$student->id])}}" class="btn btn-outline-dark">Detail</a>
                         </div>
+                        
                     </div>
-                    </a>
+                    
                 @endforeach
             </div>
         </div>

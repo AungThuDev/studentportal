@@ -26,6 +26,7 @@ class CreateEmployeesTable extends Migration
             $table->bigInteger('phone');
             $table->string('address');
             $table->string('image');
+            $table->string('qrcode')->nullable();
             $table->timestamps();
         });
     }

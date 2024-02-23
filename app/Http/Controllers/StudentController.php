@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\School;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class StudentController extends Controller
 {
@@ -50,12 +53,17 @@ class StudentController extends Controller
         $student->phone = $request->input('phone');
         $student->address = $request->input('address');
         $student->school_id = auth()->user()->school_id;
+        
+        $student->save();
+
+        $student->qrcode = QrCode::size(250)->generate(route('student.info',$student->id));
 
         $imagePath = $request->file('image')->store('public/students');
         $imageName = basename($imagePath);
         $student->image = $imageName;
 
         $student->save();
+
         $school = Session::get('name');
         return redirect()->route('student',['name'=>$school,'id'=>auth()->user()->id]);
     }
@@ -63,5 +71,26 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($stdId);
         return view('frontend.student.detail',compact('student'));
+    }
+    public function detailInfo($id)
+    {
+        $student = Student::findOrFail($id);
+        $school_name = Session::get('name');
+        return view('frontend.student.info',compact('student','school_name'));
+    }
+    public function exportImage($id)
+    {
+        $student = Student::findOrFail($id);
+        $image = View::make('frontend.student.front',$student)->render();
+
+        $imageDirectory = public_path('images');
+        $imagePath = $imageDirectory . '/output.jpg';
+
+        if(!file_exists($imageDirectory)){
+            mkdir($imageDirectory, 0755 ,true);
+        }
+
+        Browsershot::html($image)->setIncludePath('$PATH:/usr/local/bin/')->save($imagePath);
+        return response()->download($imagePath,'output.jpg');
     }
 }

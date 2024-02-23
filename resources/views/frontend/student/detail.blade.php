@@ -21,20 +21,20 @@
                     <div class="col-lg-4 d-flex justify-content-center">
                         <div class="d-flex flex-column align-items-center custom-card">
                             <div class="col-md-3 d-flex justify-content-center mb-3">
-                                <img class="img" src="{{asset('asset/img/student.png')}}">
+                                <img class="img" src="{{ asset('storage/students/' . $student->image) }}">
                             </div>
-                            <p class="mb-0 mt-3">Name - Aung Thu Htut</p>
-                            <p class="mb-0 mt-3">Std ID - 1</p>
-                            <p class="mb-0 mt-3">Batch No. - Batch - 5</p>
-                            <p class="mb-0 mt-3">University - MST University</p>
+                            <p class="mb-0 mt-3">Name - {{$student->name}}</p>
+                            <p class="mb-0 mt-3">Std ID - {{$student->student_no}}</p>
+                            <p class="mb-0 mt-3">Batch No. - {{$student->batch}}</p>
+                            <p class="mb-0 mt-3">University - {{$student->school->name}}</p>
                         </div>
                     </div>
 
                     <div class="col-lg-4 d-flex justify-content-center">
                         <div class="d-flex flex-column align-items-center custom-card" style="height: 450px;">
                             <p class="mb-0 mt-1" style="font-size: 18px;">MST University</p>
-                            <div class="col-md-3 d-flex justify-content-center" style="margin-top: 45px;">
-                                <img class="qr-code" src="{{asset('asset/img/220px-Qr-1.svg.png')}}">
+                            <div class="col-md-3 d-flex justify-content-center" style="margin-top: 45px;width:200px;height:200px;margin-bottom:45px;">
+                                {!!$student->qrcode!!}
                             </div>
                             <p class="mb-0 mt-3">Scan Here</p>
                         </div>
@@ -42,7 +42,7 @@
 
                     <div class="col-lg-3 d-flex justify-content-center align-items-center">
                         <div class="row">
-                        <button class="btn btn-danger mb-3">Export to jpg format</button>
+                        <a href="{{route('image',$student->id)}}" class="btn btn-outline-danger mb-3">Export Student Card</a>
                         <button class="btn btn-warning">Download Recommadation</button>
                         </div>
                     </div>
