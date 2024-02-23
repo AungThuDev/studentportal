@@ -57,6 +57,7 @@ class StudentController extends Controller
         $student->save();
 
         $student->qrcode = QrCode::size(250)->generate(route('student.info',$student->id));
+        
 
         $imagePath = $request->file('image')->store('public/students');
         $imageName = basename($imagePath);

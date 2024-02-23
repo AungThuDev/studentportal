@@ -18,13 +18,14 @@ class CheckSchoolAccess
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
+        // dd($user);
         if($user && $user->school)
         {
             $requestSchoolName = $request->route('name');
             $requestedUserId = $request->route('id');
             //dd($requestSchoolName,$requestedUserId);
 
-            //dd($user->school->name);
+            // dd($user->school->name != $requestSchoolName || $user->id != $requestedUserId);
             
             if($user->school->name != $requestSchoolName || $user->id != $requestedUserId)
             {
