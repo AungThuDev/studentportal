@@ -10,7 +10,7 @@
             <div class="row d-flex">
                 <div class="col-12 d-flex justify-content-center text-underline mb-3">My Student Document List</div>
                 <div class="col-md-3 d-flex justify-content-center">
-                    <img class="icon" src="{{ asset('asset/img/undraw_Educator_re_ju47.png') }}">
+                    <img class="icon" src="{{ asset('storage/schools/' . $image) }}">
                 </div>
                 <form action="" method="" class="col-md-7 offset-md-2 d-flex flex-column align-items-end">
                     @csrf
@@ -18,7 +18,7 @@
                     <div
                         class="custom-form-control-2 rounded w-100 d-flex flex-wrap align-items-center justify-content-around">
                         <p class="mb-0">Authority Name -</p>
-                        <input id="authority-name" class="authority-input fw-bold text-dark" value="Ms. Thiri Shwe Sin"
+                        <input id="authority-name" class="authority-input fw-bold text-dark" value="{{auth()->user()->name}}"
                             disabled>
                     </div>
                     <div id="edit-container" class="d-none col-gap-2 mt-3">
@@ -33,6 +33,7 @@
             <div class="row d-flex justify-content-start flex-wrap col-gap-2 card-container mt-5">
 
                 @foreach ($students as $student)
+                    <a href="{{route('student.detail',['name'=>$student->school->name,'id'=>auth()->user()->id,'stdId'=>$student->id])}}">
                     <div class="col-lg-4 d-flex justify-content-center">
                         <div class="d-flex flex-column align-items-center custom-card">
                             <div class="col-md-3 d-flex justify-content-center">
@@ -43,6 +44,7 @@
                             <p class="mb-0 mt-3">Batch No. - Batch - {{ $student->batch }}</p>
                         </div>
                     </div>
+                    </a>
                 @endforeach
             </div>
         </div>

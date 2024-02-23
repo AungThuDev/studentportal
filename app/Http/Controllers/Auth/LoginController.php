@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\School;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,22 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if(!auth()->attempt($credentials))
+        {
+            return redirect()->back()->with('error', 'Wrong Credentials');
+        }
+
+        $id = auth()->user()->id;
+        $school = School::where('id', auth()->user()->school_id)->first();
+        $school_name = $school->name;
+        Session::put('name', $school_name);
+
+        return redirect()->route('dashboard', ['id' => $id, 'name' => $school_name]);
     }
 }

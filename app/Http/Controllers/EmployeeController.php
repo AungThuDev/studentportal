@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\School;
 use App\Models\Employee;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        $employee = Employee::all();
-        return view('frontend.employee.index',compact('employee'));
+        $userschoolId = Auth::user()->school_id;
+        $school = School::where('id',$userschoolId)->pluck('image');
+        $image = $school[0];
+        $employees = Employee::where('school_id',$userschoolId)->get();
+        
+        return view('frontend.employee.index',compact('employees','image'));
     }
-    public function create()
+    public function create($name,$id)
     {
+        $userschoolId = Auth::user()->school_id;
+        $employees = Employee::where('school_id',$userschoolId)->get();
         return view('frontend.employee.create');
     }
     public function store(Request $request)
@@ -41,12 +50,14 @@ class EmployeeController extends Controller
         $employee->email = $request->input('email');
         $employee->phone = $request->input('phone');
         $employee->address = $request->input('address');
+        $employee->school_id = auth()->user()->school_id;
 
         $imagePath = $request->file('image')->store('public/employee');
         $imageName = basename($imagePath);
         $employee->image = $imageName;
 
         $employee->save();
-        return redirect()->route('student');
+        $school = Session::get('name');
+        return redirect()->route('employee',['name'=>$school,'id'=>auth()->user()->id]);
     }
 }

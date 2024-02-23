@@ -9,11 +9,11 @@
         <div class="col-lg-10 offset-lg-1 authority-form-container">
             <div class="row d-flex">
                 <div class="col-md-3 d-flex justify-content-center">
-                    <img class="icon" src="{{asset('storage/schools/'.auth()->user()->school->image)}}">
+                    <img class="icon" src="{{ asset('storage/schools/' . $school->image) }}">
                 </div>
                 <form action="" method="" class="col-md-7 offset-md-2 d-flex flex-column align-items-end">
                     @csrf
-                    <a href="{{route('dashboard.edit',$school->id)}}" class="btn btn-info mb-3">Edit</a>
+                    <a href="{{route('dashboard.edit',['id'=>$school->id,'name'=>$school->name])}}" class="btn btn-info mb-3">Edit</a>
                     <div
                         class="custom-form-control-2 rounded w-100 d-flex flex-wrap align-items-center justify-content-around">
                         <p class="mb-0">Authority Name -</p>
@@ -28,21 +28,21 @@
             </div>
             <div class="row px-3">
                 <a class="col-md-5 custom-form-control-2 rounded mt-5 cursor-pointer text-center"
-                    href="{{ route('student.create') }}">
+                    href="{{route('student.create',['name'=>$school->name,'id'=>auth()->user()->id])}}">
                     <p class="mb-0 text-dark">Make Student Document ID</p>
                 </a>
                 <a class="col-md-5 offset-md-2 custom-form-control-2 rounded mt-5 cursor-pointer text-center"
-                    href="{{ route('employee.create') }}">
+                    href="{{route('employee.create',['name'=>$school->name,'id'=>auth()->user()->id])}}">
                     <p class="mb-0 text-dark">Make Employee Document ID</p>
                 </a>
             </div>
             <div class="row px-3">
                 <a class="col-md-5 custom-form-control-2 rounded mt-5 cursor-pointer text-center"
-                    href="{{ route('student') }}">
+                    href="{{ route('student',['name'=>$school->name,'id'=>auth()->user()->id]) }}">
                     <p class="mb-0 text-dark">My Student Document List</p>
                 </a>
                 <a class="col-md-5 offset-md-2 custom-form-control-2 rounded mt-5 cursor-pointer text-center"
-                    href="{{ route('employee') }}">
+                    href="{{route('employee',['name'=>$school->name,'id'=>auth()->user()->id])}}">
                     <p class="mb-0 text-dark">My Employee Document List</p>
                 </a>
             </div>

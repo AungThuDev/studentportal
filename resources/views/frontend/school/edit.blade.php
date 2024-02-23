@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<form action="{{route('dashboard.update',$school->id)}}" method="POST" class="row mt-4 d-flex" enctype="multipart/form-data">
+<form action="{{route('dashboard.update',['id'=>$school->id,'name'=>$school->name])}}" method="POST" class="row mt-4 d-flex" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="col-lg-7">

@@ -10,15 +10,15 @@
             <div class="row d-flex">
                 <div class="col-12 d-flex justify-content-center text-underline mb-3">My Employee Document List</div>
                 <div class="col-md-3 d-flex justify-content-center">
-                    <img class="icon" src="{{ asset('asset/img/undraw_Educator_re_ju47.png') }}">
+                    <img class="icon" src="{{ asset('storage/schools/' . $image) }}">
                 </div>
                 <form action="" method="" class="col-md-7 offset-md-2 d-flex flex-column align-items-end">
                     @csrf
-                    <p class="mb-0 text-muted text-underline cursor-pointer" id="edit">Edit</p>
+                    
                     <div
                         class="custom-form-control-2 rounded w-100 d-flex flex-wrap align-items-center justify-content-around">
                         <p class="mb-0">Authority Name -</p>
-                        <input id="authority-name" class="authority-input fw-bold text-dark" value="Ms. Thiri Shwe Sin"
+                        <input id="authority-name" class="authority-input fw-bold text-dark" value="{{auth()->user()->name}}"
                             disabled>
                     </div>
                     <div id="edit-container" class="d-none col-gap-2 mt-3">
@@ -33,14 +33,14 @@
             </div>
             <div class="row d-flex justify-content-between flex-wrap col-gap-2 card-container mt-5">
 
-                @foreach ($employee as $emp)
+                @foreach ($employees as $emp)
                     <div class="col-lg-4 d-flex justify-content-center">
                         <div class="d-flex flex-column align-items-center custom-card" style="width: 250px;">
                             <div class="col-md-3 d-flex justify-content-center">
                                 <img class="icon" src="{{ asset('storage/employee/' . $emp->image) }}">
                             </div>
                             <p class="mb-0 mt-3">Name - {{ $emp->name }}</p>
-                            <p class="mb-0 mt-3">Std ID - {{ $emp->emp_no }}</p>
+                            <p class="mb-0 mt-3">Emp ID - {{ $emp->emp_no }}</p>
                             <p class="mb-0 mt-3">Position. - {{ $emp->position }}</p>
                         </div>
                     </div>
@@ -52,22 +52,22 @@
 
 @section('script')
     <script>
-        document.getElementById('edit').addEventListener('click', function() {
-            document.getElementById('authority-name').removeAttribute('disabled');
-            let value = document.getElementById('authority-name').value;
-            document.getElementById('authority-name').value = "";
-            document.getElementById('authority-name').placeholder = value;
-            document.getElementById('edit-container').classList.remove("d-none");
-            document.getElementById('edit-container').classList.add("d-flex");
-        })
+        // document.getElementById('edit').addEventListener('click', function() {
+        //     document.getElementById('authority-name').removeAttribute('disabled');
+        //     let value = document.getElementById('authority-name').value;
+        //     document.getElementById('authority-name').value = "";
+        //     document.getElementById('authority-name').placeholder = value;
+        //     document.getElementById('edit-container').classList.remove("d-none");
+        //     document.getElementById('edit-container').classList.add("d-flex");
+        // })
 
-        document.getElementById('cancel').addEventListener('click', function() {
-            document.getElementById('authority-name').disabled = true;
-            let placeholder = document.getElementById('authority-name').placeholder;
-            document.getElementById('authority-name').value = placeholder;
-            document.getElementById('authority-name').placeholder = "";
-            document.getElementById('edit-container').classList.remove("d-flex");
-            document.getElementById('edit-container').classList.add("d-none");
-        })
+        // document.getElementById('cancel').addEventListener('click', function() {
+        //     document.getElementById('authority-name').disabled = true;
+        //     let placeholder = document.getElementById('authority-name').placeholder;
+        //     document.getElementById('authority-name').value = placeholder;
+        //     document.getElementById('authority-name').placeholder = "";
+        //     document.getElementById('edit-container').classList.remove("d-flex");
+        //     document.getElementById('edit-container').classList.add("d-none");
+        //})
     </script>
 @endsection

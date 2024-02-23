@@ -13,6 +13,7 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="nav d-flex flex-wrap align-items-center justify-content-end p-4">
         <div class="nav-item d-flex flex-wrap justify-content-around">
@@ -22,8 +23,15 @@
             <a href="#" class="nav-item text-dark fw-bold">Blog</a>
         </div>
         <div class="nav-login d-flex flex-wrap justify-content-around align-items-center mx-md-5">
-            <a href="#" class="text-white">Login</a>
-            <a href="#" class="btn btn-dark rounded-pill">Register</a>
+            @auth
+            <form action="{{route('logout-school')}}" method="POST">
+                @csrf
+                <button class="btn btn-dark rounded-pill" style="margin-right: 10px;">Logout</button>
+            </form>
+            @else
+                <a href="/login" class="text-white">Login</a>
+                <a href="{{route('register-school')}}" class="btn btn-dark rounded-pill">Register</a>
+            @endauth
         </div>
     </nav>
     <div class="main-content">
@@ -42,4 +50,5 @@
     </div>
 </body>
 @yield('script')
+
 </html>

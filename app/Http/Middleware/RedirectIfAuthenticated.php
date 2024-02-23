@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Session;
 
 class RedirectIfAuthenticated
 {
@@ -17,15 +18,27 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, ...$guards)
-    {
-        $guards = empty($guards) ? [null] : $guards;
+    // public function handle(Request $request, Closure $next, ...$guards)
+    // {
+    //     $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
+    //     foreach ($guards as $guard) {
+    //         if (Auth::guard($guard)->check()) {
+    //             return redirect(RouteServiceProvider::HOME);
+    //         }
+    //     }
+
+    //     return $next($request);
+    // }
+    public function handle(Request $request, Closure $next, $guard = null)
+    {
+        
+
+            $name = Session::get('name');
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect($name.'/user-dashboard/'.auth()->user()->id);
             }
-        }
+        
 
         return $next($request);
     }

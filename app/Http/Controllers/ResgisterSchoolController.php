@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use App\Models\School;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use App\Models\School;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ResgisterSchoolController extends Controller
 {
@@ -61,25 +63,26 @@ class ResgisterSchoolController extends Controller
             $user->save();
 
             DB::commit();
-
-            return redirect()->route('dashboard');
+            Auth::login($user);
+            Session::put('name',$school->name);
+            return redirect($school->name.'/user-dashboard/'.$user->id);
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withError('Registration failed: ' . $e->getMessage())->withInput();
         }
     }
-    public function dashboard($id)
+    public function dashboard($name,$id)
     {
-        $school = School::FindOrFail($id);
-        return view('frontend.school.dashboard', compact('school'));
+        $school = School::where('id',$id)->with('users')->first();
+        return view('frontend.school.dashboard', compact('school','name'));
     }
-    public function edit($id)
+    public function edit($name,$id)
     {
         $school = School::FindOrFail($id);
-        return view('frontend.school.edit', compact('school'));
+        return view('frontend.school.edit', compact('school','name'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $name,$id)
     {
         $school = School::findOrFail($id);
         
@@ -134,10 +137,15 @@ class ResgisterSchoolController extends Controller
             }
             DB::commit();
 
-            return redirect('/dashboard/'.$school->id);
+            return redirect($school->name.'/user-dashboard/'.$school->id);
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withError('Failed to update school details: ' . $e->getMessage())->withInput();
         }
+    }
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/');
     }
 }

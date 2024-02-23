@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\School;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index($name,$id)
     {
-        $students = Student::all();
-        return view('frontend.student.index',compact('students'));
+        $userschoolId = Auth::user()->school_id;
+        $school = School::where('id',$userschoolId)->pluck('image');
+        $image = $school[0];
+        $students = Student::where('school_id',$userschoolId)->get();
+        return view('frontend.student.index',compact('students','name','image'));
     }
-    public function create()
+    public function create($name,$id)
     {
-        return view('frontend.student.create');
+        $userschoolId = Auth::user()->school_id;
+        $students = Student::where('school_id',$userschoolId)->get();
+        return view('frontend.student.create',compact('students','name'));
     }
     public function store(Request $request)
     {
@@ -41,12 +49,19 @@ class StudentController extends Controller
         $student->email = $request->input('email');
         $student->phone = $request->input('phone');
         $student->address = $request->input('address');
+        $student->school_id = auth()->user()->school_id;
 
         $imagePath = $request->file('image')->store('public/students');
         $imageName = basename($imagePath);
         $student->image = $imageName;
 
         $student->save();
-        return redirect()->route('student');
+        $school = Session::get('name');
+        return redirect()->route('student',['name'=>$school,'id'=>auth()->user()->id]);
+    }
+    public function show($name,$id,$stdId)
+    {
+        $student = Student::findOrFail($stdId);
+        return view('frontend.student.detail',compact('student'));
     }
 }

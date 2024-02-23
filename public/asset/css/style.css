@@ -151,6 +151,22 @@ body {
     object-fit: cover;
 }
 
+.img{
+    width: 180px;
+    height: 180px;
+    border-radius: 100px;
+    border: 2px solid var(--primary-text);
+    object-fit: cover;
+}
+
+.qr-code{
+    width: 250px;
+    height: 250px;
+    border-radius: 100px;
+    
+    object-fit: cover;
+}
+
 .icon-2 {
     width: 80px !important;
     height: 80px !important;

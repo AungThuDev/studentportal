@@ -22,7 +22,7 @@ class CreateStudentsTable extends Migration
             $table->string('date');
             $table->string('batch');
             $table->string('education');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->bigInteger('phone');
             $table->string('address');
             $table->string('image');
