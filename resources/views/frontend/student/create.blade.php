@@ -33,15 +33,10 @@
                         <p class="mb-0 fs-4 text-dark">M.S.T University</p>
                         <p class="mb-0 fs-5 text-muted">Student Year - *2023 - 2024*</p>
                     </div>
-                    <div class="qr-container d-flex flex-column align-items-end position-absolute end-0 top-0">
-                        <img src="{{ asset('asset/img/220px-Qr-1.svg.png') }}" class="icon-2 qr-code">
-                        <a class="mb-0 text-muted text-underline mt-1 cursor-pointer">Generate QR</a>
-                        <a class="mb-0 text-muted text-underline mt-1 cursor-pointer">Generate Document</a>
-                    </div>
                 </div>
                 <div>
                     <p class="mb-0">Name</p>
-                    <input class="custom-form-control-1 w-100" name="name" type="text">
+                    <input class="custom-form-control-1 w-100" value="{{ old('name') }}" name="name" type="text">
                 </div>
                 @error('name')
                     <span role="alert">
@@ -50,7 +45,8 @@
                 @enderror
                 <div class="mt-3">
                     <p class="mb-0">Student ID</p>
-                    <input class="custom-form-control-1 w-100" name="student_no" type="text">
+                    <input class="custom-form-control-1 w-100" value="{{ old('student_no') }}" name="student_no"
+                        type="text">
                 </div>
                 @error('student_no')
                     <span role="alert">
@@ -60,7 +56,8 @@
                 <div class="row d-flex mt-3">
                     <div class="col-md-6">
                         <p class="mb-0">NRC Number</p>
-                        <input class="custom-form-control-1 w-100" name="nrc" type="text">
+                        <input class="custom-form-control-1 w-100" value="{{ old('nrc') }}" name="nrc"
+                            type="text">
                         @error('nrc')
                             <span role="alert">
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -70,7 +67,8 @@
 
                     <div class="col-md-6">
                         <p class="mb-0">Date Of Birth</p>
-                        <input class="custom-form-control-1 w-100" name="date" type="date">
+                        <input class="custom-form-control-1 w-100" value="{{ old('date') }}" name="date"
+                            type="date">
                         @error('date')
                             <span role="alert">
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -81,7 +79,7 @@
                 </div>
                 <div class="mt-3">
                     <p class="mb-0">Batch No.</p>
-                    <input class="custom-form-control-1 w-100" name="batch" type="text">
+                    <input class="custom-form-control-1 w-100" value="{{ old('batch') }}" name="batch" type="text">
                 </div>
                 @error('batch')
                     <span role="alert">
@@ -90,7 +88,8 @@
                 @enderror
                 <div class="mt-3">
                     <p class="mb-0">Level of Education</p>
-                    <input class="custom-form-control-1 w-100" name="education" type="text">
+                    <input class="custom-form-control-1 w-100" value="{{ old('education') }}" name="education"
+                        type="text">
                 </div>
                 @error('education')
                     <span role="alert">
@@ -100,7 +99,8 @@
                 <div class="row d-flex mt-3">
                     <div class="col-md-6">
                         <p class="mb-0">Email Address</p>
-                        <input class="custom-form-control-1 w-100" name="email" type="text">
+                        <input class="custom-form-control-1 w-100" value="{{ old('email') }}" name="email"
+                            type="text">
                         @error('email')
                             <span role="alert">
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -110,7 +110,8 @@
 
                     <div class="col-md-6">
                         <p class="mb-0">Phone Number</p>
-                        <input class="custom-form-control-1 w-100" name="phone" type="number">
+                        <input class="custom-form-control-1 w-100" value="{{ old('phone') }}" name="phone"
+                            type="number">
                         @error('phone')
                             <span role="alert">
                                 <strong class="text-danger">{{ $message }}</strong>
@@ -121,7 +122,7 @@
                 </div>
                 <div class="mt-3">
                     <p class="mb-0">Address</p>
-                    <input class="custom-form-control-1 w-100" name="address" type="text">
+                    <input class="custom-form-control-1 w-100" value="{{ old('address') }}" name="address" type="text">
                 </div>
                 @error('address')
                     <span role="alert">
